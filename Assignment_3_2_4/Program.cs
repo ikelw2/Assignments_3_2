@@ -32,18 +32,22 @@ while (true)
     double d = SpectrePreloaded.AskUserForDouble("Enter value for fourth number");
 
     double total, average;
-    bool noError = CalcTotalAndAvg(out total, out average, [a, b, c, d]);
 
-    if (noError = true)
+    double[] myNewArray = CreatArrayCalcTotalAndAvg(out total, out average, [a, b, c, d]); // returns array
+    
+    //bool noError = CalcTotalAndAvg(out total, out average, [a, b, c, d]); // returns true if noError, or false if error occurred...
+
+    if (true) //noError = true)
     {
         string paramString = String.Concat(a, ", ", b, ", ", c, " and ", d);
         AnsiConsole.MarkupLine($"The average of {paramString} is: [green]{average}[/]");
         AnsiConsole.MarkupLine($"The total is [green]{total}[/]");
+        AnsiConsole.MarkupLine($"The returned array is [green]{string.Join(", ",myNewArray)}[/]");
     }
-    else
-    {
-        AnsiConsole.MarkupLine("[red]ERROR: There was an error - no results for you.[/]");
-    }
+    //else
+    //{
+    //    AnsiConsole.MarkupLine("[red]ERROR: There was an error - no results for you.[/]");
+    //}
 
 
 
@@ -65,7 +69,37 @@ while (true)
 
 
 
-bool CalcTotalAndAvg(out double total, out double average, params double[] inputParams) {
+double[] CreatArrayCalcTotalAndAvg(out double total, out double average, double[] inputParams)
+{ // params keyword is optional
+    try
+    {
+        double localTotal = 0.0;
+        foreach (double number in inputParams) // for each param in param array numbers
+        {
+            localTotal += number;
+        }
+        // calculate localAverage
+        double localAverage = localTotal / inputParams.Length; // use Length member for count of elements
+
+        // assign calulation results to out variables 
+        total = localTotal;
+        average = localAverage;
+    }
+    catch (System.Exception e)
+    {
+        // inform user there was an error
+        Console.Beep();
+        AnsiConsole.MarkupLine($"There was an error: [red]{e.Message}[/]");
+
+        // assign dummy values and exit
+        total = 0.0;
+        average = 0.0;
+        return [0.0];
+    }
+    return inputParams;
+}
+
+bool CalcTotalAndAvg(out double total, out double average, double[] inputParams) { // params keyword is optional
     try
     {
         double localTotal = 0.0;

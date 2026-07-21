@@ -20,7 +20,7 @@ internal class Circle
         return Area.ToString();
     }
 
-    // overloading the '+' operator
+    // overloading the '+' operator ----------------
     public static Circle operator +(Circle left, Circle right)
     {
         // returns a new circle with combined area
@@ -28,7 +28,7 @@ internal class Circle
         double newRadius = Math.Sqrt((newArea / Math.PI)); // radius = sqrt( area / pi )
         return new Circle(newRadius);
     }
-    // overloading the '-' operator
+    // overloading the '-' operator ----------------
     public static Circle operator -(Circle left, Circle right)
     {
         // returns a new circle with difference of areas
