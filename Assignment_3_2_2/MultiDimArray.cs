@@ -1,6 +1,7 @@
 ﻿using Spectre.Console;
 using System;
 using System.Globalization;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MultiDimArrayClassNamespace;
 
@@ -170,24 +171,32 @@ internal class MultiDimArrayClass
     {
         // add two matrix together using nested loops
         int[,] SumOfMatrix = new int[NumRows, NumCols];
+        int maxWidth = 0; // also determine width inside this nested loop, rather than doing it a second time using foreach below
+        int len = 0;
         for (int r = 0; r < NumRows; r++)
         {
-            for (int c = 0; c < NumCols; c++)
+            for (int c = 0; c < NumCols; c++)  //////// BIG O of this 2x nested loop is "N^2"... which is not particularly good performance
             {
-                SumOfMatrix[r,c] = TheArray1[r,c] + TheArray2[r,c];   
+                SumOfMatrix[r,c] = TheArray1[r,c] + TheArray2[r,c];
+                len = SumOfMatrix[r, c].ToString().Length;
+                if (len > maxWidth)
+                {
+                    maxWidth = len;
+                }
             }
         }
 
-        // determine how many characters to print in the result
-        int maxWidth = 0;
-        foreach (int number in SumOfMatrix)
-        {
-            int len = number.ToString().Length;
-            if (len > maxWidth)
-            {
-                maxWidth = len;
-            }
-        }
+        //moved this functionality into the above nested loop, to increase efficiency
+                        // determine how many characters to print in the result 
+                        //int maxWidth = 0;
+                        //foreach (int number in SumOfMatrix)
+                        //{
+                        //    int len = number.ToString().Length;
+                        //    if (len > maxWidth)
+                        //    {
+                        //        maxWidth = len;
+                        //    }
+                        //}
 
         // print value out afterwards
         Console.WriteLine();

@@ -58,8 +58,8 @@ internal static class SpectrePreloaded
     //===========================================================================
     public static int AskUserForInteger(string prompt = "Enter an Integer") //, int minVal = -100000, int maxVal = 100000)
     {
-        const int minVal = 1; // for addition, we want to limit to 1 as minimum
-        const int maxVal = 30; // max is 30, for screen width; seems to work fine at 500, just takes a long time
+        const int minVal = -10000000;
+        const int maxVal = 10000000;
         int input = AnsiConsole.Prompt(
         new TextPrompt<int>($"{prompt}: ") // (between {minVal} and {maxVal}) here: ")
             .Validate(x =>
