@@ -34,15 +34,15 @@ while (true)
     double total, average;
     bool noError = CalcTotalAndAvg(out total, out average, [a, b, c, d]);
 
-    if (noError = false)
-    {
-        AnsiConsole.MarkupLine("[red]ERROR: There was an error - no results for you.[/]");
-    }
-    else
+    if (noError = true)
     {
         string paramString = String.Concat(a, ", ", b, ", ", c, " and ", d);
         AnsiConsole.MarkupLine($"The average of {paramString} is: [green]{average}[/]");
         AnsiConsole.MarkupLine($"The total is [green]{total}[/]");
+    }
+    else
+    {
+        AnsiConsole.MarkupLine("[red]ERROR: There was an error - no results for you.[/]");
     }
 
 
@@ -69,15 +69,12 @@ bool CalcTotalAndAvg(out double total, out double average, params double[] input
     try
     {
         double localTotal = 0.0;
-        int count = 0;
         foreach (double number in inputParams) // for each param in param array numbers
         {
             localTotal += number;
-            // sum to get localTotal
-            count++;
         }
         // calculate localAverage
-        double localAverage = localTotal / count;
+        double localAverage = localTotal / inputParams.Length; // use Length member for count of elements
         
         // assign calulation results to out variables 
         total = localTotal;
