@@ -10,7 +10,7 @@ using CircleClassNamespace;
 while (true)
 {
     SpectrePreloaded.StartupPanel("Assignment 3.2.3", "Overloaded operator to add/subtract objects of \ntype circle, resulting in a new circle with sum/diff of area");
-    //SpectrePreloaded.HighlightMethod("Method 2 to format values", "use foreach number.ToString().Length to count digits // thanks to a peer");
+    //SpectrePreloaded.HighlightMethod("Method 1", "brute force");
 
 
 
