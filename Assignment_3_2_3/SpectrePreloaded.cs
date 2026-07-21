@@ -56,12 +56,28 @@ internal static class SpectrePreloaded
             Console.Clear();
     }
     //===========================================================================
-    public static int AskUserForInteger(string prompt = "Enter an Integer") //, int minVal = -100000, int maxVal = 100000)
+    public static double AskUserForPositiveDouble(string prompt = "Enter a Double") 
     {
-        const int minVal = -10000000;
-        const int maxVal = 10000000;
+        double input = AnsiConsole.Prompt(
+        new TextPrompt<double>($"{prompt}: ")
+            .ValidationErrorMessage("[red]Invalid input.[/] Please enter a valid positive decimal number.")
+            .Validate(x =>
+            {
+                return x switch
+                {
+                    < 0.01 => ValidationResult.Error($"[red]Must be greater than 0.01[/]"),
+                    _ => ValidationResult.Success(),
+                };
+            }));
+        return input;
+    }
+    //===========================================================================
+    public static int AskUserForInteger(string prompt = "Enter an Integer") 
+    {
+        const int minVal = -1000000; // int.MinValue;
+        const int maxVal = 1000000; // int.MaxValue; // likely need to update this for your specific program to prevent ERRORS
         int input = AnsiConsole.Prompt(
-        new TextPrompt<int>($"{prompt}: ") // (between {minVal} and {maxVal}) here: ")
+        new TextPrompt<int>($"{prompt}: ") 
             .Validate(x =>
             {
                 return x switch

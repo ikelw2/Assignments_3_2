@@ -9,16 +9,26 @@ using CircleClassNamespace;
 
 while (true)
 {
-    SpectrePreloaded.StartupPanel("Assignment 3.2.3", "Overloaded operator to add areas of circle (objects)");
+    SpectrePreloaded.StartupPanel("Assignment 3.2.3", "Overloaded operator to add/subtract objects of \ntype circle, resulting in a new circle with sum/diff of area");
     //SpectrePreloaded.HighlightMethod("Method 2 to format values", "use foreach number.ToString().Length to count digits // thanks to a peer");
 
 
 
-    int size;
-    size = SpectrePreloaded.AskUserForInteger("Enter the array size (same for two arrays)");
+    double area1 = SpectrePreloaded.AskUserForPositiveDouble("Enter the area of circle 1");
+    double radius1 = Math.Sqrt((area1 / Math.PI));
 
-    Circle myCircle1 = new (3.4);
-    Circle myCircle2 = new (5.7);
+    double area2 = SpectrePreloaded.AskUserForPositiveDouble("Enter the area of circle 2");
+    double radius2 = Math.Sqrt((area2 / Math.PI));
+
+    Circle circle1 = new(radius1);
+    Circle circle2 = new(radius2);
+
+    Circle combined = circle1 + circle2;
+    Circle difference = circle1 - circle2;
+
+    AnsiConsole.MarkupLine($"The area of the new combined circle is [yellow]{combined.ToString():D3}[/]");
+    AnsiConsole.MarkupLine($"The area of the new difference circle is [yellow]{difference.ToString():D3}[/]");
+
 
     if (SpectrePreloaded.AskUserToContinue() == false)
     {
